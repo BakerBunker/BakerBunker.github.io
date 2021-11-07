@@ -83,7 +83,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">118</span>
+            <span class="post-count">160</span>
         </span>
     </span>
 
@@ -121,8 +121,9 @@
 <li>Apply STFT to new voice waveform, get new amplitude spectrum and phase spectrum.</li>
 <li>Drop new amplitude spectrum, and goto 2.</li>
 </ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">phases = np.exp(<span class="number">2j</span> * np.pi * np.random.rand(*S.shape))</span><br><span class="line">S_complex = np.<span class="built_in">abs</span>(S).astype(np.<span class="built_in">complex</span>)</span><br><span class="line">y = _istft(S_complex * phases, hparams)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(hparams.griffin_lim_iters):</span><br><span class="line">    phases = np.exp(<span class="number">1j</span> * np.angle(_stft(y, hparams)))</span><br><span class="line">    y = _istft(S_complex * phases, hparams)</span><br></pre></td></tr></table></figure>
 <h2 id="why">Why?</h2>
-<p>In the appendix of this paper, the difference between estimated value and true value shall decrease continuously in the iterative process.</p>
+<p>In the appendix of this paper, the difference between estimated value and true value decreases continuously in the iterative process.</p>
 <p>But it is hard to understand the proving process for me right now. So maybe I will look back to it later.</p>
  
       <!-- reward -->
